@@ -6,25 +6,42 @@
 //   [23, 71, 33, 82, 1] 印出 24
 
 function sumOfSmallestValues(arr) {
-  let min = arr[0]            // 最小值，並以陣列第0項的值初始化
-  let biggerThanMin = arr[1]  // 次小值，並以陣列第1項的值初始化
-  let tmp = 0                 // 暫存用變數，用於交換前兩項用
-  if (min > biggerThanMin) {  //
-    tmp = min                 // 若最小值大於次小值，將兩者交換
-    min = biggerThanMin       // 因之後迴圈會先比較次小值與當前
-    biggerThanMin = tmp       // 值，故需確定最小值不大於次小值。
-  }
-  for (let i = 2; i < arr.length; i++) { // 從第2項開始逐項比較
-    if (biggerThanMin > arr[i]) {  // 先比較次小值與當前值，若當
-      biggerThanMin = arr[i]       // 前值較小則更新次小值，
-      if (min > biggerThanMin) {   // 並接著比較新的次小值與最小
-        tmp = min                  // 值，若次小值較小則兩者交換。
-        min = biggerThanMin
-        biggerThanMin = tmp
+  /*
+    用 reduce 方法遍歷 arr 所有元素，在 reduce 外初始化兩個變數記錄最小、次小值，
+    並設為無限大。
+    找出最小值的方法，就是像從一條路的一端(起點)出發，看到石頭撿起來比較，如果比自己
+    的石頭小，就把原本的丟掉，保留新的，到終點時，手上就會是最小的。
+    而要找出次小值，就是在手上拿兩顆石頭(A)，撿起新的石頭時(B)，**先跟自己較大的石頭比較**(C)，如果比較小，就交換(D)，到終點時，手上就會有兩顆最小的石頭了。
+    注意上面執行 (C) 時，為了區分最小跟次小，(D) 還會檢查剛才新撿起的石頭是不是最小。
+    因此每一輪做的事情：
+    撿起石頭 : cur
+    比較石頭與手上目前較大的石頭(次小值, pre)的大小 : boolean(pre > cur)
+      如果比較小，就交換 :
+      if(pre > cur) {
+         bigger = cur
+      }
+        接著如果新的這顆石頭比最小的石頭還小，兩者交換 : 
+        if (smaller > bigger) {
+          pre = smaller
+          smaller = bigger
+        }
+    標記好手上哪顆石頭是較大的，準備下一次比較 : return pre
+  */
+  
+  let smaller = bigger = Infinity
+  bigger = arr.reduce(function (pre, cur) {
+    console.log(`> pre = ${pre}, cur = ${cur}, smaller = ${smaller}, bigger = ${bigger}`);
+    if (pre > cur) {
+      bigger = cur
+      if (smaller > bigger) {
+        pre = smaller
+        smaller = bigger
       }
     }
-  }                                // 全部元素比較完畢，得到最小
-  return min + biggerThanMin       // 值與次小值，回傳相加結果。
+    console.log(`> pre = ${pre}, cur = ${cur}, smaller = ${smaller}, bigger = ${bigger}`);
+    return pre
+  }, bigger)
+  return smaller + bigger
 }
 
 const list1 = [19, 5, 42, 2, 77]
