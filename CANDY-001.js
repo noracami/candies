@@ -7,41 +7,47 @@
 
 function sumOfSmallestValues(arr) {
   /*
-    用 reduce 方法遍歷 arr 所有元素，在 reduce 外初始化兩個變數記錄最小、次小值，
-    並設為無限大。
-    找出最小值的方法，就是像從一條路的一端(起點)出發，看到石頭撿起來比較，如果比自己
-    的石頭小，就把原本的丟掉，保留新的，到終點時，手上就會是最小的。
+    用 reduce 方法遍歷 arr 所有元素，在 reduce 外初始化變數smaller用來記錄最小值，並設為無限大。
+    找出最小值的方法，就是像從一條路的一端(起點)出發，看到石頭撿起來比較，如果比自己的石頭小，就把原本的丟掉，保留新的，到終點時，手上就會是最小的。
     而要找出次小值，就是在手上拿兩顆石頭(A)，撿起新的石頭時(B)，**先跟自己較大的石頭比較**(C)，如果比較小，就交換(D)，到終點時，手上就會有兩顆最小的石頭了。
     注意上面執行 (C) 時，為了區分最小跟次小，(D) 還會檢查剛才新撿起的石頭是不是最小。
     因此每一輪做的事情：
-    撿起石頭 : cur
-    比較石頭與手上目前較大的石頭(次小值, pre)的大小 : boolean(pre > cur)
+    
+    撿起石頭 : current_value
+    
+    比較石頭與手上目前較大的石頭(次小值, bigger)的大小 :
+    
       如果比較小，就交換 :
-      if(pre > cur) {
-         bigger = cur
-      }
-        接著如果新的這顆石頭比最小的石頭還小，兩者交換 : 
-        if (smaller > bigger) {
-          pre = smaller
-          smaller = bigger
+        if(bigger > current_value) {
+          bigger = current_value
         }
-    標記好手上哪顆石頭是較大的，準備下一次比較 : return pre
+
+        接著如果新的這顆石頭比最小的石頭還小，兩者交換 : 
+          if (smaller > current_value) {
+            bigger = smaller
+            smaller = current_value
+          }
+    
+      標記好手上哪顆石頭是較大的，準備下一次比較 : return bigger
+
+    全部元素檢查完後，用變數 nextOne 承接 reduce 的回傳值(陣列次小值)
+    回傳 smaller 與 nextOne 的相加結果。
   */
   
-  let smaller = bigger = Infinity
-  bigger = arr.reduce(function (pre, cur) {
-    console.log(`> pre = ${pre}, cur = ${cur}, smaller = ${smaller}, bigger = ${bigger}`);
-    if (pre > cur) {
-      bigger = cur
-      if (smaller > bigger) {
-        pre = smaller
-        smaller = bigger
+  let smaller = Infinity // 宣告在reduce block外，以記錄操作結果。
+  const nextOne = arr.reduce(function (bigger, current_value) {
+    // console.log(`> smaller = ${smaller}, bigger = ${bigger}, current_value = ${current_value}`);
+    if (bigger > current_value) {    // 若當前值小於次小值，
+      bigger = current_value         // 更新次小值。
+      if (smaller > current_value) { // 又如果當前值小於最小值
+        bigger = smaller             // 更新次小值、
+        smaller = current_value      // 更新最小值。
       }
     }
-    console.log(`> pre = ${pre}, cur = ${cur}, smaller = ${smaller}, bigger = ${bigger}`);
-    return pre
-  }, bigger)
-  return smaller + bigger
+    // console.log(`> smaller = ${smaller}, bigger = ${bigger}, current_value = ${current_value}`);
+    return bigger // 回傳次小值
+  }, Infinity)
+  return smaller + nextOne
 }
 
 const list1 = [19, 5, 42, 2, 77]
