@@ -11,23 +11,22 @@ function missingChar(chars) {
   // assume missingChar not at begin/end and only 1 missingChar in given string
   chars = chars.map(x => x.charCodeAt(0)) // trans char to utf-16 code
   /*
-   *  if missing happen, their diff would be 2 rather than 1.
-   *  so use reduce to find the gap.
+   *  if missing happen, their diff would not be 1.
+   *  so we can find the gap.
    *
    *  a . b . c . d . . . f . g
    *  97  98  99  100     102 103
    *    1   1   1      2     1
    *  
-   *  than trans utf-16 to string.
+   *  then trans utf-16 to string.
    */
-  
-  chars.reduce(function (pre, cur) {
-    // console.log(`cur:${cur} - pre:${pre} = ${cur - pre}`);
-    if (cur - pre === 2) {
-      console.log(String.fromCharCode(cur-1));
+
+  for (let i = 1; i < chars.length; i++) {
+    if (chars[i] - chars[i-1] !== 1) {
+      return String.fromCharCode(chars[i] - 1)
     }
-    return cur
-  }, chars.shift()) // pop first element as init "pre" value.
+  }
+  return "Not find the missingChar."
 }
 
 console.log(missingChar(chars1)); // 印出 e
