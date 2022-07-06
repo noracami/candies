@@ -7,16 +7,24 @@ let list = [false, 1, 0, -1, 2, 0, 1, 3, "a"]
 
 function moveZerosToEnd(arr) {
   // 程式碼寫在這裡
-  const result = [[], []] // 建兩個陣列分別儲存0與0以外的值
-  for (const e of arr) {
-    if(e !== 0) {
-      result[0].push(e)
-    }
-    else {
-      result[1].push(e)
+  /*
+     result : ..., [e], ..., [a], [0], [0]
+                    ↑         ↑    ↑    ↑
+                  last       1st  1st  2nd
+                   !0        !0    0    0
+     將陣列從終點開始取，一個一個填到新陣列起點，即會跟
+     原本陣列排列相同；
+     並將取到的丟到新陣列終點，即完成排序。
+  */
+  const result = []
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i] === 0) {
+      result.push(arr[i])
+    } else {
+      result.unshift(arr[i])
     }
   }
-  return result.flat(1) // 合併陣列
+  return result
 }
 
 let result = moveZerosToEnd(list)
