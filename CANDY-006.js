@@ -5,15 +5,15 @@
 
 function findDifferent(numbers) {
   // 實作寫在這裡
-  let a = numbers.pop() // 0. 宣告變數
-  let b = false
+  let theNumber = numbers.pop() // 0. 宣告變數
+  let theOther = false
   for (e of numbers) {
-    if (b) {
-      // 2. 下次遇到的元素的值，一定是a不然就是b
-      return e ^ a ^ b
-    } // 3. XOR運算，若 A = B 則 A ^ B = 0，因此留下不一樣的值
-    if (e !== a) {
-      b = e // 1. 找到新元素後，記錄起來
+    if (theOther !== false) {
+      // 2. 判斷下個元素和誰不一樣，回傳它
+      return theNumber ? e !== theNumber : theOther
+    }
+    if (e !== theNumber) {
+      theOther = e // 1. 找到新元素後，記錄起來
     }
   }
 }
