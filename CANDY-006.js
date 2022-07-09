@@ -5,17 +5,26 @@
 
 function findDifferent(numbers) {
   // 實作寫在這裡
-  let theNumber = numbers.pop() // 0. 宣告變數
-  let theOther = false
-  for (e of numbers) {
-    if (theOther !== false) {
-      // 2. 判斷下個元素和誰不一樣，回傳它
-      return theNumber ? e !== theNumber : theOther
-    }
-    if (e !== theNumber) {
-      theOther = e // 1. 找到新元素後，記錄起來
+  const stack = numbers.splice(0, 1)
+  let foundTwoNumber = false
+  while (numbers.length) {
+    stack.unshift(numbers.shift())
+    if (foundTwoNumber) {
+      if (stack[0] !== stack[1]) {
+        return stack[1]
+      } else {
+        return stack[2]
+      }
+    } else if (stack[0] !== stack[1]) {
+      if (stack.length > 2) {
+        return stack[0]
+      } else {
+        foundTwoNumber = true
+        continue
+      }
     }
   }
+  return `Can't find different number.`
 }
 
 console.log(findDifferent([1, 1, 1, 1, 3, 1, 1, 1])) // 印出 3
