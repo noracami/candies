@@ -8,11 +8,16 @@ function findSomeDifferent(numbers) {
   const nL = numbers.length
   let result = "not find different number."
   for (let i = 0; i < nL; i++) {
-    const currentNum = Math.abs(numbers[i] % 2)
-    const beforeNum = Math.abs(numbers[(i - 1 + nL) % nL] % 2)
-    const afterNum = Math.abs(numbers[(i + 1 + nL) % nL] % 2)
-    if (currentNum !== beforeNum && currentNum !== afterNum) {
-      result = numbers[i]
+    const currentNum = numbers[i]
+    const beforeNum = numbers[(i - 1 + nL) % nL]
+    //如果跟前一位比奇偶性不同
+    if ((currentNum + beforeNum) % 2 != 0) {
+      const afterNum = numbers[(i + 1 + nL) % nL]
+      //且跟後一位比奇偶性不同
+      if ((currentNum + afterNum) % 2 != 0) {
+        //找到目標
+        result = numbers[i]
+      }
     }
   }
   return result
