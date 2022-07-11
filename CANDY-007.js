@@ -5,22 +5,17 @@
 
 function findSomeDifferent(numbers) {
   // 實作寫在這裡
-  // turns to (1 or 0) array
-  const binaryList = numbers.map((e) => Math.sqrt(e * e) % 2)
-  const sumOfList = binaryList.reduce((pre, cur) => pre + cur)
-  let goal
-  if (sumOfList === 1) {
-    // means only one 1 and some 0s
-    goal = 1
-  } else {
-    // otherwise
-    goal = 0
-  }
-  for (i = 0; i < binaryList.length; i++) {
-    if (binaryList[i] === goal) {
-      return numbers[i]
+  const nL = numbers.length
+  let result = "not find different number."
+  for (let i = 0; i < nL; i++) {
+    const currentNum = Math.abs(numbers[i] % 2)
+    const beforeNum = Math.abs(numbers[(i - 1 + nL) % nL] % 2)
+    const afterNum = Math.abs(numbers[(i + 1 + nL) % nL] % 2)
+    if (currentNum !== beforeNum && currentNum !== afterNum) {
+      result = numbers[i]
     }
   }
+  return result
 }
 
 console.log(findSomeDifferent([2, 4, 0, 100, 4, 11, 2602, 36])) // 印出 11
