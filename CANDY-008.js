@@ -6,26 +6,19 @@
 
 function highestScoreWord(input) {
   // 實作寫在這裡
-  let result = ""
-  const wordList = input.split(" ").map((word) => {
-    // 1. 對傳入字串input切成陣列後，對每一單字做處理，稍後回傳
-    const score = Array.from(word).reduce((pre, cur) => {
-      // 2. 將單字轉為陣列後，用reduce將每一字元轉成分數並加總
-      //    儲存至 score
-      return pre + cur.charCodeAt(0) - 96
-    }, 0)
-    // 3. 將目前處理單字與它的分數組成物件後回傳儲存至 wordList
-    return { word, score }
-    // equal return {"word": word, "score": score}
-  })
-  result = wordList.reduce((pre, cur) => {
-    if (pre.score > cur.score) {
-      return pre
-    } else {
-      return cur
-    }
-  }).word
-  return result
+  return input
+    .split(" ")
+    .map((word) => {
+      // 1. 對傳入字串input切成陣列後，對每一單字做處理，稍後回傳
+      const score = [...word].reduce((pre, cur) => {
+        // 2. 將單字轉為陣列後，用reduce將每一字元轉成分數並加總
+        //    儲存至 score
+        return pre + cur.charCodeAt(0) - 96
+      }, 0)
+      // 3. 將目前處理單字與它的分數組成物件後回傳給 map
+      return { word, score } // equal return {"word": word, "score": score}
+    })
+    .sort((a, b) => b.score - a.score)[0].word
 }
 
 console.log(highestScoreWord("lorem ipsum dolor sit amet")) // 印出 ipsum
