@@ -5,16 +5,17 @@
 
 function uniqueOrder(sequence) {
   // 實作寫在這裡
-  // 由右至左比較，遇到新元素就累加
-  return [...sequence].reduceRight(
-    (pre, cur) => {
-      if (pre[0] !== cur) {
-        pre.unshift(cur)
-      }
-      return pre
-    },
-    [sequence[sequence.length - 1]]
-  )
+  // 遇到不同的添加進result
+  return [...sequence].filter((e, i) => i === 0 || e !== sequence[i - 1])
+
+  // const result = [sequence[0]]
+  // for (let i = 1, j = 0; i < sequence.length; i++) {
+  //   if (result[j] !== sequence[i]) {
+  //     j++
+  //     result.push(sequence[i])
+  //   }
+  // }
+  // return result
 }
 
 console.log(uniqueOrder("AABCC")) // [ 'A', 'B', 'C']
