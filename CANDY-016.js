@@ -7,8 +7,8 @@ function toCamelCase(str) {
   // 實作寫在這裡
   return str
     .split("_")
-    .map((word, notFirstWord) =>
-      notFirstWord ? word[0].toUpperCase().concat(word.slice(1)) : word
+    .map((word, i) =>
+      i > 0 ? word[0].toUpperCase().concat(word.slice(1)) : word
     )
     .join("")
 }
