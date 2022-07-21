@@ -6,8 +6,7 @@
 #   [23, 71, 33, 82, 1] 印出 24
 
 def sumOfSmallestValues arr
-  # 陣列由小到大排序後，回傳前兩項相加結果
-  arr.sort.first(2).sum
+  arr.min(2).sum
 end
 
 list1 = [19, 5, 42, 2, 77]
