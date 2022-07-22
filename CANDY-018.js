@@ -4,10 +4,10 @@
 
 //Math.random() return x , 0 <= x < 1
 function randomNumber(min, max) {
-  if (!max) {
-    return Math.floor(Math.random() * min)
-  } else {
+  if (max) {
     return Math.floor(Math.random() * (max - min) + min)
+  } else {
+    return Math.floor(Math.random() * min)
   }
 }
 
