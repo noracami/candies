@@ -3,8 +3,8 @@
 // 題目：實作一個可以印出隨機整數的函數
 
 //Math.random() return x , 0 <= x < 1
-function randomNumber(min, max = -1) {
-  if (max == -1) {
+function randomNumber(min, max) {
+  if (!max) {
     return Math.floor(Math.random() * min)
   } else {
     return Math.floor(Math.random() * (max - min) + min)
