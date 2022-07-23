@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 # 編號：006
 # 程式語言：Ruby
 # 題目：找出在數字陣列裡跟其它元素不一樣的值
-# 範例：
 
 def find_different(numbers)
-  # 實作寫在這裡
   if numbers.count(numbers.min) == 1
     numbers.min
   else

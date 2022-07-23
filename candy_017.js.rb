@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 編號：CANDY-017
 # 程式語言：Ruby
 # 題目：計算數字的 2 進位裡有幾個 1

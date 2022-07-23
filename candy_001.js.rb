@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 編號：CANDY-001
 # 程式語言：Ruby
 # 題目：找出陣列裡最小的兩個值的總和

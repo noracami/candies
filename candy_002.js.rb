@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 編號：CANDY-002
 # 程式語言：Ruby
 # 題目：請寫一小段程式，印出連續陣列裡缺少的字元

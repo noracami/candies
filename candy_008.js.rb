@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 編號：008
 # 程式語言：Ruby
 # 題目：傳入一字串，計算得分最高的字
@@ -5,7 +7,6 @@
 #      所有傳入的字都是小寫。
 
 def highest_score_word(input)
-  # 實作寫在這裡
   scoring_words = input.split(' ').map do |word|
     {
       word: word,
