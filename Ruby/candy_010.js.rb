@@ -6,10 +6,9 @@
 # 範例：9527 變成 "1000 x 9 + 100 x 5 + 10 x 2 + 7"
 
 def expanded_form(num)
-  digis = num.to_s.codepoints.map { |x| (x - 48) }
-  digis = digis.map.with_index do |element, index|
-    power = 10**(digis.size - index - 1)
-    power == 1 ? element.to_s : "#{power} x #{element}"
+  digis = num.to_s.split('').map.with_index do |element, index|
+    pow = 10**(num.to_s.size - index - 1)
+    pow == 1 ? element : "#{pow} x #{element}"
   end
   digis.reject { |x| x.end_with? '0' }.join(' + ')
 end
