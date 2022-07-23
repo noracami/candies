@@ -3,11 +3,11 @@
 # 題目：計算數字的 2 進位裡有幾個 1
 # 範例：5 -> 101 -> 2 個 1
 
-def countBits(num)
+def count_bits(num)
   # 實作寫在這裡
   num.to_s(2).count('1')
 end
 
-p countBits(1234) # 5
-p countBits(1450) # 6
-p countBits(9527) # 8
+p count_bits(1234) # 5
+p count_bits(1450) # 6
+p count_bits(9527) # 8
