@@ -6,11 +6,7 @@
 # 範例："AAABBBDDDAABBBCC" -> ['A', 'B', 'D', 'A', 'B', 'C']
 
 def unique_order(sequence)
-  sequence.size
-          .times
-          .map { |i| sequence[i] }
-          .join
-          .squeeze
+  sequence.is_a?(Array) ? sequence.join.squeeze : sequence.squeeze
 end
 
 p unique_order('AABCC') # ['A', 'B', 'C']
