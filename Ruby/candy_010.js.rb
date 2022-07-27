@@ -6,11 +6,22 @@
 # 範例：9527 變成 "1000 x 9 + 100 x 5 + 10 x 2 + 7"
 
 def expanded_form(num)
-  digis = num.to_s.split('').map.with_index do |element, index|
-    pow = 10**(num.to_s.size - index - 1)
-    pow == 1 ? element : "#{pow} x #{element}"
-  end
-  digis.reject { |x| x.end_with? '0' }.join(' + ')
+  num.digits
+     .map
+     .with_index do |x, i|
+       (i.zero? ? x : "#{10**i} x #{x}") unless x.zero?
+     end
+     .compact
+     .reverse
+     .join(' + ')
+  # digis =
+  #   num.to_s
+  #      .split('')
+  #      .map.with_index do |element, index|
+  #        pow = 10**(num.to_s.size - index - 1)
+  #        pow == 1 ? element : "#{pow} x #{element}"
+  #      end
+  # digis.reject { |x| x.end_with? '0' }.join(' + ')
 end
 
 p expanded_form(8) # 印出 "8"
