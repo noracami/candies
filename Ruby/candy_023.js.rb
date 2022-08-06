@@ -7,12 +7,12 @@
 
 def two_sum(array, target)
   # 實作寫在這裡
-  array.combination(2)
-       .map(&:sum)
-       .zip(Array(0...array.size).combination(2))
-       .select { |e| e.first == target }
-       .first
-       .last
+  seen = {}
+  array.each.with_index do |idx|
+    return [seen[target - array[idx]], idx] if seen.key?(target - array[idx])
+
+    seen[array[idx]] = idx
+  end
 end
 
 p two_sum([1, 3, 2, 8, 11], 9) # 印出 [0, 3]
