@@ -5,10 +5,19 @@
 
 function twoSum(array, target) {
   // 實作寫在這裡
+  const hashMap = new Map()
   for (let i = 0; i < array.length; i++) {
-    const idx = array.findIndex((e) => e === target - array[i])
-    if (idx > -1) {
-      return [i, idx]
+    console.log(
+      `${i}) if ${target} - ${array[i]} = ${target - array[i]} is in hashMap ?`
+    )
+    if (hashMap[target - array[i]] >= 0) {
+      console.log(
+        `yes, hashMap['${target - array[i]}'] = ${hashMap[target - array[i]]}`
+      )
+      return [hashMap[target - array[i]], i]
+    } else {
+      console.log(`no, save ${array[i]} with index=${i}`)
+      hashMap[array[i]] = i
     }
   }
 }
