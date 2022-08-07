@@ -8,10 +8,10 @@
 def two_sum(array, target)
   # 實作寫在這裡
   seen = {}
-  array.each.with_index do |idx|
-    return [seen[target - array[idx]], idx] if seen.key?(target - array[idx])
+  array.each.with_index do |num, idx|
+    return [seen[target - num], idx] if seen.key?(target - num)
 
-    seen[array[idx]] = idx
+    seen[num] = idx
   end
 end
 
