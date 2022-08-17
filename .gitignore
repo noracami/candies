@@ -1,6 +1,1 @@
-/*
-!/Javascript/
-!/Ruby/
-!/codewars/
-!/leetcode/
-!.*
+/node_modules
