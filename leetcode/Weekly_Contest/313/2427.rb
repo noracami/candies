@@ -4,7 +4,10 @@
 # @param {Integer} b
 # @return {Integer}
 def common_factors(a, b)
-  [*1..a.gcd(b)].filter { |i| (a % i + b % i).zero? }.size
+  1.upto(a.gcd(b)).count { |x| (a % x + b % x).zero? }
+
+  # 2
+  # [*1..a.gcd(b)].filter { |i| (a % i + b % i).zero? }.size
 
   # 1
   # result = 0
