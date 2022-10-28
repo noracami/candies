@@ -1,5 +1,11 @@
+# frozen_string_literal: true
+
+# @param {Integer[]} nums
+# @return {Integer[][]}
 def three_sum(nums)
   two_sum = lambda { |array, target|
+    return nil if array.size < 2
+
     seen = {}
     res = []
 
@@ -18,9 +24,8 @@ def three_sum(nums)
   nums.sort!
 
   until nums.empty?
-    i = nums.first
-    ans.concat(two_sum.call(nums[1..], i) || [])
-    nums.delete(i)
+    ans.concat(two_sum.call(nums[1..], nums.first) || [])
+    nums.delete(nums.first)
   end
 
   ans
