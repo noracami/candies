@@ -12,61 +12,29 @@ def unique_paths_iii(grid)
   ans = [0]
   
   backtracking(grid, x, y, empty_squares, {}, ans)
-  # p "paths: #{empty_squares}"
-  # puts '='*100
-  # puts '='*100
-  # p [x, y]
-  puts "ans: #{ans}"
+
   ans.last
 end
 
 def backtracking(grid, x, y, paths, cache, ans)
-  # print "#{x}-#{y}, "
-  # puts [grid, x, y, paths, cache, ans].zip(%w[grid, x, y, paths, cache, ans]).map { |e|
-  #   "#{e[1]}: #{e[0]}"
-  # }.join(", ")
+  # if cell visited 
+  return if cache["#{x}-#{y}"]
 
-  # if visited cell
-  # return if cache["#{x}-#{y}"]
-  if cache["#{x}-#{y}"]
-    # print "back(v), "
-    return
-  end
+  # if cell is obstacle 
+  return if grid[x][y] == -1
 
-  # if obstacle cell
-  # puts "x:#{x}\ty:#{y}"
-  # return if grid[x][y] == -1
-  if grid[x][y] == -1
-    # print "back(o), "
-    return
-  end
-
-  # print "#{x}-#{y}, "
-
-  # if end cell
+  # if cell is end 
   if grid[x][y] == 2
-    # p 'got'
-    # p "paths: #{paths}"
-    # p '='*10
-    # ans[0] += 1 if paths == 0
-    # print "end --> #{paths}, "
-    if paths[0] + 1 == paths.size
-      ans[0] += 1
-      # p paths + ["#{x}-#{y}"]
-      # print "ans+1\n"
-    else
-      # print "\n"
-    end
+    # if visited all empty cells (and start & end)
+    ans[0] += 1 if paths[0] + 1 == paths.size
     return
   end
 
-  # empty cell
+  # if cell is empty 
   cache["#{x}-#{y}"] = true
-  # paths -= 1
   paths << "#{x}-#{y}"
   
   # check next cell
-  
   cells = []
   cells << [x-1, y] if x > 0
   cells << [x+1, y] if x < grid.size - 1
