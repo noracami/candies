@@ -10,13 +10,17 @@
 # @param {TreeNode} root
 # @return {Integer[]}
 def preorder_traversal(root)
-  def traversal(list=[], tree)
-    return list unless tree
+  return [] if root.nil?
 
-    list << tree.val
-    traversal(list, tree.left)
-    traversal(list, tree.right)
+  res = []
+  stack = [root]
+
+  until stack.empty?
+    node = stack.pop
+    next if node.nil?
+    res << node.val
+    stack << node.right << node.left
   end
 
-  traversal([], root)
+  res
 end
